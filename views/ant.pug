@@ -2,11 +2,11 @@ extends layout
 
 block content
   h1= title
-  - var Ant=[{antName:"Cutee",antAge:1,antColor:"Black"},{antName:"flower",antAge:11,antColor:"white"},{antName:"Har",antAge:13,antColor:"red"}]
+  - var Ant= results;
   div(class="container-fluid")
   div(class="row")
    each f,index in Ant
-    div(class="col-sm-2" onclick =`buy(${index})`) #{f.antName}, #{f.antAge}, #{f.antColor}
+    div(class="col-sm-2" onclick =`buy(${index})`) #{f.antName}, #{f.age}, #{f.color}
 
      script. 
        function buy(index)

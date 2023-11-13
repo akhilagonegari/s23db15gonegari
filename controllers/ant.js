@@ -65,5 +65,51 @@ exports.ant_create_post = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+    exports.ant_detail = async function (req, res) {
+        console.log("detail" + req.params.id)
+        try {
+            result = await ant.findById(req.params.id)
+            res.send(result)
+        } catch (error) {
+            res.status(500)
+            res.send(`{"error": document for id ${req.params.id} not found`);
+        }
+    };
+    
+    //New code for Assignment 12 for screenshot2
+    //Handle ant update form on PUT
+    exports.ant_update_put = async function (req, res) {
+        console.log(`update on id ${req.params.id} with body 
+    ${JSON.stringify(req.body)}`)
+        try {
+            let toUpdate = await ant.findById(req.params.id)
+            // Do updates of properties
+            if (req.body.antName)
+                toUpdate.antName = req.body.antName;
+            if (req.body.age) toUpdate.age= req.body.age;
+            if (req.body.color) toUpdate.color= req.body.color;
+            let result = await toUpdate.save();
+            console.log("Sucess " + result)
+            res.send(result)
+        } catch (err) {
+            res.status(500)
+            res.send(`{"error": ${err}: Update for id ${req.params.id} 
+    failed`);
+        }
+    };
+
+   
+    exports.ant_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await ant.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
     
     

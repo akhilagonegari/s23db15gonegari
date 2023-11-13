@@ -53,6 +53,8 @@ var resourceRouter = require('./routes/resource');
 
 
 
+
+
 var app = express();
 
 // view engine setup
@@ -71,6 +73,7 @@ app.use('/ant', antRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

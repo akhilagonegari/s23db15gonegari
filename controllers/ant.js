@@ -123,6 +123,6 @@ exports.ant_create_post = async function(req, res) {
     res.status(500)
     res.send(`{'error': '${err}'}`);
     }
-    }    
+    };   
     
     

@@ -3,7 +3,10 @@ const ant_controlers= require('../controllers/ant');
 var router = express.Router();
 /* GET costumes */
 router.get('/', ant_controlers.ant_view_all_Page );
-module.exports = router;
+// GET request for one costume.
+router.get('/ant/:id', ant_controlers.ant_detail);
+
 
 // GET detail ant page */
 router.get('/detail', ant_controlers.ant_view_one_Page);
+module.exports = router;

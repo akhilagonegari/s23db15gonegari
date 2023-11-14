@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+
+  - let antid = toShow._id
+  - let ant_Name = toShow.antName
+  - let antage = toShow.antAge
+  - let antcolor = toShow.antColor
+
+  div
+    div.row
+      div(class='antAttr mr-3') ant ID is:
+      div #{antid}
+
+    div.row
+      div(class='antAttr mr-3') ant Name is:
+      div #{ant_Name}
+
+    div.row
+      div(class='antAttr mr-3') ant age is:
+      div #{antage}
+
+    div.row
+      div(class='antAttr mr-3') ant color is:
+      div #{antcolor}

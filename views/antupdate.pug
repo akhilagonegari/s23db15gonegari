@@ -1,0 +1,46 @@
+extends layout
+
+block content
+  h1= title
+  - let antid = toShow._id
+  - let ant_Name = toShow.antName
+  - let age  = toShow.age
+  - let color = toShow.color
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{antid}
+
+  - let actionid = "/resource/ant/" + antid
+  form(id='antForm', action= actionid, method="PUT")
+    div.form-group
+      label.antAttr(for='ant_Name') Ant_Name
+      input#ant_Name(type='text', name='ant_Name', value= ant_Name)
+
+    div.form-group
+      label.antAttr(for='age') Ant age
+      input#age(type='number', name='age', value= age)
+
+    div.form-group
+      label.antAttr(for='color') Ant color
+      input#color(type='text', name='color', value= color)
+
+    input(type="submit")
+
+  script.
+    document.forms['antForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show the user that the form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeeded");
+        // TODO handle the response body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed: " + error);
+      });
+    });

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  form(id='antForm', action="/resource/ant", method="POST")
+    div.form-group-create
+      label.antAttr(for='ant_Name') ant_Name
+      input#ant_Name(type='text', name='ant_Name')
+    div.form-group-create
+      label.antAttr(for='age') antage
+      input#age(type='number', name='age')
+    div.form-group-create
+      label.antAttr(for='color') antcolor
+      input#color(type='text', name='color')
+    input(type="submit")
+    script.
+      document.forms['antForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show the user that the form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Save succeeded")
+          // TODO handle the body
+        }).catch((error) => {
+          // TODO handle the error
+          alert("Save failed " + error )
+        });
+      });

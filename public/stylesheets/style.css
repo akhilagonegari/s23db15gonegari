@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.antAttr {
+  background-color: rgb(255, 200, 127);
+  width: 120px;
+  }

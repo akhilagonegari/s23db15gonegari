@@ -1,12 +1,13 @@
+
 extends layout
 
 block content
   h1= title
 
   - let antid = toShow._id
-  - let ant_Name = toShow.antName
-  - let antage = toShow.antAge
-  - let antcolor = toShow.antColor
+  - let antName = toShow.antName
+  - let age = toShow.age
+  - let color = toShow.color
 
   div
     div.row
@@ -15,12 +16,12 @@ block content
 
     div.row
       div(class='antAttr mr-3') ant Name is:
-      div #{ant_Name}
+      div #{antName}
 
     div.row
       div(class='antAttr mr-3') ant age is:
-      div #{antage}
+      div #{age}
 
     div.row
       div(class='antAttr mr-3') ant color is:
-      div #{antcolor}
+      div #{color}

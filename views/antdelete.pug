@@ -1,0 +1,57 @@
+extends layout
+block content
+  h1= title
+
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let antid = toShow._id
+    - let antName = toShow.antName
+    - let age = toShow.age
+    - let color = toShow.color
+    - let actionid = "/resource/ant/" + antid
+
+    div
+      div.row
+        div(class='antAttr mr-3') ant id is:
+          div #{antid}
+      div.row
+        div(class='antAttr mr-3') antName is:
+          div #{antName}
+      div.row
+        div(class='antAttr mr-3') age is:
+          div #{age}
+      div.row
+        div(class='antAttr mr-3') antcolor is:
+          div #{color}
+
+    
+    script.
+      document.getElementById('deleteButton').addEventListener('click', deleteAntById);
+      document.getElementById('cancelButton').addEventListener('click', cancelDelete);
+
+  button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+    button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+
+  script.
+    function cancel() {
+      // Go back to the home page for the ant collection
+      window.location.href='/ant'
+    }
+  script.
+    function deleteOnid() {
+      console.log("starting delete");
+      // delete first
+      fetch(actionid, {
+        method: 'DELETE'     // Don't need a body for the delete
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Delete succeeded");
+        window.location.href='/ant';
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Delete failed " + error );
+      });
+    }

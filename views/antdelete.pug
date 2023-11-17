@@ -1,57 +1,49 @@
 extends layout
 block content
   h1= title
-
   if (toShow == null)
     h2 No instance to delete
   else
-    - let antid = toShow._id
+    - let antid  = toShow._id
     - let antName = toShow.antName
     - let age = toShow.age
     - let color = toShow.color
     - let actionid = "/resource/ant/" + antid
-
+    script let actionid = "#{actionid}"
     div
       div.row
-        div(class='antAttr mr-3') ant id is:
-          div #{antid}
+        div(class='antAttr mr-3') ant ID :
+        div #{antid}
       div.row
-        div(class='antAttr mr-3') antName is:
-          div #{antName}
+        div(class='antAttr mr-3') antName :
+        div #{antName}
       div.row
-        div(class='antAttr mr-3') age is:
-          div #{age}
+        div(class='antAttr mr-3') age :
+        div #{age}
       div.row
-        div(class='antAttr mr-3') antcolor is:
-          div #{color}
-
-    
-    script.
-      document.getElementById('deleteButton').addEventListener('click', deleteAntById);
-      document.getElementById('cancelButton').addEventListener('click', cancelDelete);
-
-  button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        div(class='antAttr mr-3') color :
+        div #{color}
+    button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
     button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
-
   script.
     function cancel() {
-      // Go back to the home page for the ant collection
+      // Go back to the home page for the house collection
       window.location.href='/ant'
     }
   script.
     function deleteOnid() {
-      console.log("starting delete");
+      console.log("starting delete")
       // delete first
       fetch(actionid, {
-        method: 'DELETE'     // Don't need a body for the delete
+        method: 'DELETE'
       }).then((resp) => {
         return resp.json(); // or resp.text() or whatever the server sends
       }).then((body) => {
-        alert("Delete succeeded");
-        window.location.href='/ant';
+        alert("Delete succeded")
+        window.location.href='/ant'
         // TODO handle body
       }).catch((error) => {
         // TODO handle error
-        alert("Delete failed " + error );
+        alert("Delete failed " + error )
       });
     }

@@ -2,14 +2,15 @@ extends layout
 
 block content
   h1= title
-  - var Ant= results;
+  - let items = results;
   div(class="container-fluid")
-  div(class="row")
-   each f,index in Ant
-    div(class="col-sm-2" onclick =`buy(${index})`) #{f.antName}, #{f.age}, #{f.color}
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch(\"/ant/update?id=${item._id}\")`
+        div(class="row-sm-2", class="m-1") Item #{item.ant_Name}(#{item.age}) is #{item.color}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
 
-     script. 
-       function buy(index)
-       {
-        alert(`you purchased Item: ${index+1}`)
-       }
+  script.
+    function dispatch(path){
+      window.location.href=path
+    }
